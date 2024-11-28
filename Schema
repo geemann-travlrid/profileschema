@@ -1,0 +1,208 @@
+```json
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "tp": "https://example.com/travel-profile/",
+    "sec": "https://w3id.org/security#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "id": "@id",
+    "type": "@type",
+    "Profile": "tp:TravelerProfile",
+    "issuer": {
+      "@id": "sec:issuer",
+      "@type": "@id"
+    },
+    "created": {
+      "@id": "dc:created",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "dc:modified",
+      "@type": "xsd:dateTime"
+    }
+  },
+  "id": "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+  "type": "Profile",
+  "issuer": "did:example:123456789abcdefghi",
+  "created": "2024-10-22T10:00:00Z",
+  "updated": "2024-10-22T10:00:00Z",
+  "status": "active",
+  "version": "1.1.0",
+  
+  "identity": {
+    "did": "did:example:123456789abcdefghi",
+    "names": [{
+      "type": "PrimaryName",
+      "givenName": "John",
+      "middleName": "Michael",
+      "familyName": "Smith",
+      "honorificPrefix": "Mr.",
+      "honorificSuffix": "Jr.",
+      "displayFormat": "western"
+    }, {
+      "type": "AlternateName",
+      "value": "Johnny",
+      "context": "informal"
+    }],
+    "birthDate": "1985-06-15",
+    "gender": "MALE",
+    "nationality": "US"
+  },
+
+  "contact": {
+    "emails": [{
+      "type": "EmailAddress",
+      "email": "john.smith@example.com",
+      "purpose": "personal",
+      "verified": true,
+      "primary": true
+    }, {
+      "type": "EmailAddress",
+      "email": "jsmith@company.com",
+      "purpose": "business",
+      "verified": true,
+      "primary": false
+    }],
+    "phones": [{
+      "type": "ContactPoint",
+      "telephone": "+12025550178",
+      "purpose": "mobile",
+      "verified": true,
+      "primary": true,
+      "supportsMessaging": true
+    }],
+    "addresses": [{
+      "type": "PostalAddress",
+      "purpose": "home",
+      "streetAddress": "123 Main Street",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10001",
+      "addressCountry": "US",
+      "geo": {
+        "type": "GeoCoordinates",
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      },
+      "primary": true
+    }]
+  },
+
+  "preferences": {
+    "type": "tp:PreferenceSet",
+    "language": {
+      "primary": "en-US",
+      "alternatives": ["es-ES", "fr-FR"]
+    },
+    "currency": "USD",
+    "timeZone": "America/New_York",
+    
+    "communications": {
+      "preferredChannel": "email",
+      "doNotContact": false,
+      "frequency": "weekly",
+      "timePreference": {
+        "start": "09:00",
+        "end": "17:00",
+        "timeZone": "America/New_York"
+      }
+    },
+
+    "travel": {
+      "air": {
+        "seatPreference": "window",
+        "mealPreference": "regular",
+        "specialAssistance": false,
+        "cabinClass": "economy"
+      },
+      "hotel": {
+        "roomType": "king",
+        "floorPreference": "high",
+        "smoking": false
+      },
+      "car": {
+        "vehicleType": "standard",
+        "transmission": "automatic"
+      },
+      "loyaltyPrograms": [{
+        "type": "tp:LoyaltyProgram",
+        "name": "Delta SkyMiles",
+        "membershipNumber": "1234567890",
+        "tier": "Gold",
+        "category": "airline"
+      }, {
+        "type": "tp:LoyaltyProgram",
+        "name": "Marriott Bonvoy",
+        "membershipNumber": "0987654321",
+        "tier": "Platinum",
+        "category": "hotel"
+      }]
+    },
+
+    "accessibility": {
+      "mobilityAssistance": false,
+      "visualAssistance": false,
+      "audioAssistance": false,
+      "dietaryRestrictions": [{
+        "type": "allergy",
+        "value": "peanuts"
+      }, {
+        "type": "preference",
+        "value": "low-sodium"
+      }]
+    }
+  },
+
+  "credentials": {
+    "type": "tp:CredentialSet",
+    "documents": [{
+      "type": "tp:TravelDocument",
+      "documentType": "passport",
+      "documentNumber": {
+        "type": "tp:EncryptedValue",
+        "value": "enc:123456789"
+      },
+      "issuingCountry": "US",
+      "issueDate": "2020-01-01",
+      "expiryDate": "2030-01-01",
+      "verified": true
+    }]
+  },
+
+  "consent": {
+    "marketing": {
+      "granted": true,
+      "timestamp": "2024-10-22T10:00:00Z",
+      "expiryDate": "2025-10-22T10:00:00Z",
+      "scope": ["email", "sms"]
+    },
+    "dataSharing": {
+      "granted": true,
+      "timestamp": "2024-10-22T10:00:00Z",
+      "scope": ["basicProfile", "travelPreferences"]
+    }
+  },
+
+  "security": {
+    "accessControl": [{
+      "entityId": "did:example:supplier123",
+      "permissions": ["read", "write"],
+      "grantedAt": "2024-10-22T10:00:00Z",
+      "expiresAt": "2025-10-22T10:00:00Z"
+    }],
+    "encryptedFields": [
+      "credentials.documents[0].documentNumber",
+      "credentials.documents[1].documentNumber"
+    ]
+  },
+
+  "proof": {
+    "type": "Ed25519Signature2020",
+    "created": "2024-10-22T10:00:00Z",
+    "verificationMethod": "did:example:123456789abcdefghi#key-1",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z58DAdx..."
+  }
+}
+```
