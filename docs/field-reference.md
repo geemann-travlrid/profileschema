@@ -2,25 +2,118 @@
 
 The schema has 21 top-level properties. Five are required. Each section below lists the annotated field keys it declares. The schema also defines nested properties, shared types and unannotated structural fields.
 
+The examples below show the five required properties individually. [Download a complete minimal profile](examples/minimal.json). Named value types are documented under Shared types at the end.
+
 ## schemaVersion
 
-Required. 
+Identifies the schema release used to validate this record. Required at the profile root.
+
+Example
+
+```json
+{
+  "schemaVersion": "1.0.0"
+}
+```
 
 ## profileMetadata
 
-Required. 
+Records when the profile was created and last updated, its lifecycle status and optional change history. Required at the profile root.
+
+Example
+
+```json
+{
+  "profileMetadata": {
+    "created": "2026-11-19T15:00:00Z",
+    "lastUpdated": "2026-11-19T15:00:00Z",
+    "status": "active"
+  }
+}
+```
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `created` | Required | string, format `date-time` |
+| `lastUpdated` | Required | string, format `date-time` |
+| `expiresAt` | Optional | string, format `date-time` |
+| `status` | Required | One of `active`, `inactive`, `suspended`, `deleted`, `pendingVerification` |
+| `dataRetentionPolicy` | Optional | string |
+| `privacyPolicy` | Optional | string, format `uri` |
+| `versionHistory` | Optional | Array of object with required `version`, `date`, `changedBy` |
 
 ## localizationSettings
 
-Required. 
+Sets the language and display formats used for this profile. Required at the profile root.
+
+Example
+
+```json
+{
+  "localizationSettings": {
+    "defaultLanguage": "en-GB"
+  }
+}
+```
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `defaultLanguage` | Required | string, pattern `^[a-z]{2,3}(-[A-Z]{2})?$`. ISO 639 language code with optional ISO 3166-1 region |
+| `supportedLanguages` | Optional | Array of string, pattern `^[a-z]{2,3}(-[A-Z]{2})?$`, unique entries |
+| `dateFormat` | Optional | One of `ISO8601`, `RFC2822`, `LOCALE` |
+| `timeFormat` | Optional | One of `12h`, `24h` |
 
 ## consentSettings
 
-Required. Consent held by the traveller. A value classified sensitive or specialCategory may be disclosed only to a grantee holding an unexpired, unrevoked grant whose scope covers its x-key. JSON Schema cannot enforce this; the disclosing system must. Evaluate each operation against a single valid grant matching grantee, action, purpose, any restricted context and exact key or whole dotted-segment prefix. Use grantedAt inclusively and expiry or revocation exclusively. For delegates verify current authority for the traveller and operation. Deny on missing or unverifiable authority. General consent flags cannot widen a grant. Project only the fulfilment fields requested and strip internal metadata.
+Records who can access which fields, for what purpose and for how long. Required at the profile root.
+
+Consent held by the traveller. A value classified sensitive or specialCategory may be disclosed only to a grantee holding an unexpired, unrevoked grant whose scope covers its x-key. JSON Schema cannot enforce this; the disclosing system must. Evaluate each operation against a single valid grant matching grantee, action, purpose, any restricted context and exact key or whole dotted-segment prefix. Use grantedAt inclusively and expiry or revocation exclusively. For delegates verify current authority for the traveller and operation. Deny on missing or unverifiable authority. General consent flags cannot widen a grant. Project only the fulfilment fields requested and strip internal metadata.
+
+Example
+
+```json
+{
+  "consentSettings": {
+    "grants": []
+  }
+}
+```
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `grants` | Required | Array of `ConsentGrant` |
+| `marketingConsent` | Optional | boolean |
+| `thirdPartySharing` | Optional | boolean |
+| `dataRetention` | Optional | object |
 
 ## travelerIdentity
 
-Required. 
+Identifies the traveller and records the names used in different contexts. Required at the profile root.
+
+Example
+
+```json
+{
+  "travelerIdentity": {
+    "names": [
+      {
+        "primaryName": "Sample"
+      }
+    ]
+  }
+}
+```
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `did` | Optional | string, pattern `^did:[a-z0-9]+:.+$` |
+| `names` | Required | Array of `Name`, minimum items `1` |
+| `birthDate` | Optional | string, format `date` |
+| `gender` | Optional | One of `male`, `female`, `nonBinary`, `other`, `preferNotToSay` |
+| `passportGender` | Optional | One of `M`, `F`, `X` |
+| `nationality` | Optional | Array of string, pattern `^[A-Z]{2}$`, unique entries |
+| `racialIdentity` | Optional | string |
+| `photo` | Optional | string, format `uri` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -29,7 +122,14 @@ Required.
 
 ## contactInformation
 
-Optional. 
+Stores contact channels, addresses and emergency contacts. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `phones` | Optional | Array of `Phone` |
+| `emails` | Optional | Array of `Email` |
+| `addresses` | Optional | Array of `Address` |
+| `emergencyContacts` | Optional | Array of object with required `name` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -37,7 +137,16 @@ Optional.
 
 ## communicationPreferences
 
-Optional. 
+Describes how the traveller prefers to receive information. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `preferredChannels` | Optional | Array of `ChannelPreference` |
+| `preferredLanguages` | Optional | Array of object with required `language` |
+| `frequency` | Optional | One of `immediate`, `daily`, `weekly`, `monthly`, `quarterly`, `never` |
+| `units` | Optional | object |
+| `displayCurrencies` | Optional | Array of string, pattern `^[A-Z]{3}$` |
+| `settlementCurrency` | Optional | string, pattern `^[A-Z]{3}$` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -45,7 +154,20 @@ Optional.
 
 ## travelDocuments
 
-Optional. 
+References travel documents held in a vault. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `documentType` | Required | One of `passport`, `visa`, `nationalId`, `driversLicence`, `residencePermit`, `workPermit`, `vaccinationCertificate`, `healthCertificate`, `travelInsurance`, `travelAuthorisation`, `militaryId`, `birthCertificate`, `other` |
+| `issuingCountry` | Optional | string, pattern `^[A-Z]{2}$`. ISO 3166-1 alpha-2 country code |
+| `validForCountry` | Optional | string, pattern `^[A-Z]{2}$`. ISO 3166-1 alpha-2 country code |
+| `issuedAt` | Optional | string, format `date` |
+| `expiresAt` | Optional | string, format `date` |
+| `vaultRecordRef` | Required | string. Pointer to the encrypted document. Document numbers are never held in the profile in plain text. |
+| `numberHash` | Optional | string |
+| `meta` | Optional | `Meta` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -53,7 +175,18 @@ Optional.
 
 ## loyaltyPrograms
 
-Optional. 
+Records the traveller’s loyalty programme memberships. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `programType` | Required | One of `airline`, `hotel`, `carRental`, `rail`, `cruise`, `restaurant`, `retail`, `travelAlliance`, `other` |
+| `programCode` | Optional | string |
+| `programName` | Optional | string |
+| `membershipNumber` | Required | string |
+| `tier` | Optional | string |
+| `nameOnAccount` | Optional | string |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -61,7 +194,14 @@ Optional.
 
 ## preferences
 
-Optional. Standing travel preferences, each expressed on the common strength scale
+Groups standing preferences by travel service. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `air` | Optional | object. Air travel preferences |
+| `lodging` | Optional | object. Lodging preferences |
+| `rentalVehicle` | Optional | object. Rental vehicle preferences |
+| `restaurant` | Optional | object. Restaurant preferences |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -341,11 +481,53 @@ Optional. Standing travel preferences, each expressed on the common strength sca
 
 ## otherPreferences
 
-Optional. Keyed preferences for travel categories that do not yet have a structured section. Graduates into preferences once the keys are agreed.
+Stores preferences for categories outside the structured service sections. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `category` | Required | One of `rail`, `bus`, `ferry`, `cruise`, `lounge`, `restaurant`, `groundTransport`, `event`, `other` |
+| `key` | Required | string |
+| `value` | Optional | any JSON value |
+| `strength` | Required | `Strength` |
+| `rank` | Optional | integer, minimum `0`, maximum `100`. Optional tie-break among items of equal strength; higher wins. |
+| `contexts` | Optional | Array of `Context`, unique entries. Trip contexts the value applies to. Absent means any. |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
 
 ## accessibility
 
-Optional. Accessibility information and needs. Every item is special category data and may only be disclosed under an explicit consent grant
+Describes the assistance, equipment and physical conditions the traveller needs. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `needs` | Optional | Array of One of `wheelchair`, `mobilityAssistance`, `visualImpairment`, `hearingImpairment`, `cognitiveAssistance`, `serviceAnimal`, `oxygen`, `other`, unique entries. Summary flags for systems that only accept coarse categories |
+| `ssrCodes` | Optional | Array of any JSON value. IATA special service request codes to send, for example WCHR |
+| `assistiveTechnology` | Optional | Array of string. Assistive technologies the traveller uses, for example screen readers |
+| `notes` | Optional | string. Free-text assistance notes |
+| `arrivalEntryExit` | Optional | object. Arrival, entry and exit |
+| `mobilityIndoors` | Optional | object. Mobility within a room or building |
+| `eating` | Optional | object. Eating requirements |
+| `general` | Optional | object. General requirements |
+| `transport` | Optional | object. Transport requirements |
+| `bathroom` | Optional | object. Bathroom requirements |
+| `sleeping` | Optional | object. Sleeping requirements |
+| `guestRoom` | Optional | object. Guest room requirements |
+| `mobilityEquipment` | Optional | Array of `MobilityDevice`. Mobility equipment the traveller brings |
+| `equipmentHandling` | Optional | object. Handling of mobility equipment |
+| `vision` | Optional | object. Limited vision requirements |
+| `hearing` | Optional | object. Deaf and hard of hearing requirements |
+| `medicalLogistics` | Optional | object. Medical and health logistics |
+| `serviceAnimals` | Optional | Array of `ServiceAnimal`. Service animals that travel with the traveller |
+| `serviceAnimalFacilities` | Optional | object. Facilities for service animals |
+| `equipmentLoanOrRental` | Optional | Array of `EquipmentRequest`. Equipment the traveller needs the provider to lend or rent |
+| `oxygen` | Optional | object. Oxygen detail |
+| `medicalSupplies` | Optional | object. Medical supplies, storage and devices |
+| `nutritionAndInfusion` | Optional | object. Parenteral and enteral nutrition and infusions |
+| `continenceAndOstomy` | Optional | object. Continence and stoma care |
+| `careAndProximity` | Optional | object. Carers and nearby care |
+| `cognitiveAndSensory` | Optional | object. Cognitive, intellectual, psychiatric and sensory needs |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -575,7 +757,23 @@ Optional. Accessibility information and needs. Every item is special category da
 
 ## exposureSensitivities
 
-Optional. Air, chemical and allergen exposure. Special category data
+Records substances and environmental exposures relevant to fulfilment. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `fragranceAndChemicalFree` | Optional | `Scaled`. No air fresheners, scented cleaning or laundry products, potpourri, pesticide spraying, fresh paint or new carpet |
+| `awayFromSmokeChlorineKitchenLaundry` | Optional | `Scaled`. Not near smoking rooms or areas, chlorinated pools, kitchens or laundries |
+| `openableWindows` | Optional | `Scaled`. Windows that open |
+| `airFiltration` | Optional | `Scaled`. Air filtration |
+| `hardFlooring` | Optional | `Scaled`. Hard flooring |
+| `featherFreeBedding` | Optional | `Scaled`. Feather and down-free bedding |
+| `dustMiteCovers` | Optional | `Scaled`. Dust-mite covers |
+| `noRecentPets` | Optional | `Scaled`. No recent pets in the unit |
+| `latexFree` | Optional | `Scaled`. No latex |
+| `fragranceFreeSoap` | Optional | `Scaled`. No soap fragrances or additives |
+| `aloeFree` | Optional | `Scaled`. No aloe |
+| `nonAllergenicSoap` | Optional | `Scaled`. Non-allergenic soap provided |
+| `cleaningProductsDisclosed` | Optional | `Scaled`. Cleaning products used disclosed on request |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -595,7 +793,14 @@ Optional. Air, chemical and allergen exposure. Special category data
 
 ## dietary
 
-Optional. Food allergies, intolerances and diets. Airline meal codes sit in preferences.air.meals
+Records dietary requirements, restrictions and meal preferences. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `prescribedDiets` | Optional | object. Medically prescribed diets; others go in restrictions |
+| `sensoryFoodNeeds` | Optional | object. Sensory-based food needs |
+| `restrictions` | Optional | Array of object with required `type`, `item`, `strength` |
+| `mealTimes` | Optional | Array of object with required `meal` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -609,7 +814,12 @@ Optional. Food allergies, intolerances and diets. Airline meal codes sit in pref
 
 ## health
 
-Optional. Free-text health conditions and needs not covered by the structured accessibility section.
+Holds health information relevant to the traveller’s needs. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `conditions` | Optional | Array of object with required `value` |
+| `needs` | Optional | Array of object with required `value`, `strength` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -617,7 +827,17 @@ Optional. Free-text health conditions and needs not covered by the structured ac
 
 ## culturalAndReligiousInformation
 
-Optional. 
+Records cultural or religious information the traveller chooses to include. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `religion` | Optional | string |
+| `culturalIdentities` | Optional | Array of string |
+| `prayerTimes` | Optional | Array of object |
+| `prayerContext` | Optional | string |
+| `fastingPeriods` | Optional | Array of object |
+| `culturalHolidays` | Optional | Array of object |
+| `genderPreferenceForService` | Optional | One of `female`, `male`, `indifferent` |
 
 | Canonical key | Kind | Classification | Definition |
 | --- | --- | --- | --- |
@@ -625,21 +845,427 @@ Optional.
 
 ## travelCharacteristics
 
-Optional. 
+Describes characteristics of the traveller’s journeys. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `characteristicType` | Required | string |
+| `characteristicValue` | Required | string |
+| `meta` | Optional | `Meta` |
 
 ## relationships
 
-Optional. 
+Represents relationships between the traveller and other parties. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `relatedDID` | Optional | string |
+| `relationType` | Required | string |
+| `rank` | Optional | integer, minimum `0`, maximum `100` |
 
 ## platformIDs
 
-Optional. 
+Associates the profile with identifiers used by other platforms. Optional at the profile root.
+
+Each array entry accepts the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `platform` | Required | string |
+| `handle` | Required | string |
+| `avatar` | Optional | string, format `uri` |
 
 ## securitySettings
 
-Optional. 
+Records profile access and field protection settings. Optional at the profile root.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `accessControl` | Optional | Array of object with required `entityDID`, `permissions` |
+| `encryptedFields` | Optional | Array of string |
 
 ## extensions
 
-Optional. Namespaced custom data.
+Holds custom data under a defined namespace and version. Optional at the profile root.
+
+Each named extension contains the following fields.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `namespace` | Required | string |
+| `version` | Required | string |
+| `data` | Required | any JSON value |
+
+## Shared types
+
+### Strength
+
+integer, minimum `-100`, maximum `100`. The HATPro preference scale, an integer from -100 to 100, used for every preference and requirement. Reading assumed here and to be confirmed against the HATPro definition: 100 is required, -100 must be avoided, 0 is no preference, and values between are soft preferences of increasing strength. It replaces the v1 priority integer, required flag, supplier rating and constraint severity.
+
+### Context
+
+One of `any`, `business`, `leisure`. 
+
+### Meta
+
+object. Optional provenance for a single value. Derived values must say so in source.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `source` | Optional | One of `traveller`, `organisation`, `system`, `derived` |
+| `sourceRef` | Optional | string |
+| `confidence` | Optional | number, minimum `0`, maximum `1` |
+| `verifiedLevel` | Optional | One of `self`, `organisation`, `authoritative` |
+| `validFrom` | Optional | string, format `date-time` |
+| `validTo` | Optional | string, format `date-time` |
+| `updatedAt` | Optional | string, format `date-time` |
+
+### Scaled
+
+`Strength` or object with required `strength`. A preference or requirement. Either a bare strength value or an object carrying the strength with optional detail.
+
+### CodedPreference
+
+object with required `code`, `strength`. A strength attached to a coded value such as an airline or meal code.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `code` | Required | string |
+| `name` | Optional | string |
+| `strength` | Required | `Strength` |
+| `rank` | Optional | integer, minimum `0`, maximum `100`. Optional tie-break among items of equal strength; higher wins. |
+| `contexts` | Optional | Array of `Context`, unique entries. Trip contexts the value applies to. Absent means any. |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### SupplierPreference
+
+object with required `code`, `strength`. A strength attached to a named supplier, chain or brand.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `code` | Required | string |
+| `codeScheme` | Optional | One of `iata`, `chainCode`, `acriss`, `lei`, `proprietary` |
+| `name` | Optional | string |
+| `parentCode` | Optional | string. Code of the parent brand or group, when the supplier is a sub-brand. |
+| `strength` | Required | `Strength` |
+| `rank` | Optional | integer, minimum `0`, maximum `100`. Optional tie-break among items of equal strength; higher wins. |
+| `contexts` | Optional | Array of `Context`, unique entries. Trip contexts the value applies to. Absent means any. |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_m
+
+object with required `value`. A measured limit in metres. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"m"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_cm
+
+object with required `value`. A measured limit in centimetres. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"cm"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_kg
+
+object with required `value`. A measured limit in kilograms. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"kg"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_deg
+
+object with required `value`. A measured limit in degrees. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"deg"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_celsius
+
+object with required `value`. A measured limit in degrees Celsius. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number |
+| `unit` | Optional | Exactly `"celsius"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_m3
+
+object with required `value`. A measured limit in cubic metres. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"m3"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_l
+
+object with required `value`. A measured limit in litres. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"l"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Quantity_lpm
+
+object with required `value`. A measured limit in litres per minute. strength says how firmly the limit applies and defaults to 100.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `value` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"lpm"` |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### TimePreference
+
+object with required `time`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `time` | Required | string, pattern `^([01][0-9]\|2[0-3]):[0-5][0-9]$`. 24-hour local time, hh:mm |
+| `strength` | Optional | `Strength` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### Money
+
+object with required `amount`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `amount` | Required | number, minimum `0` |
+| `currency` | Optional | string, pattern `^[A-Z]{3}$`. ISO 4217 code. Absent means the currency of the rental location. |
+| `strength` | Optional | `Strength` |
+
+### Dimensions
+
+object with required `width`, `depth`, `height`. Width, depth and height in metres.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `width` | Required | number, minimum `0` |
+| `depth` | Required | number, minimum `0` |
+| `height` | Required | number, minimum `0` |
+| `unit` | Optional | Exactly `"m"` |
+
+### Battery
+
+object with required `type`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `none`, `lithium`, `nonSpillable`, `spillable`, `other` |
+| `weightKg` | Optional | number, minimum `0` |
+| `amperes` | Optional | number, minimum `0` |
+| `wattHours` | Optional | number, minimum `0` |
+| `removable` | Optional | boolean |
+
+### MobilityDevice
+
+object with required `deviceType`. A fact about equipment the traveller brings, not a preference.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `deviceType` | Required | One of `manualWheelchair`, `powerWheelchair`, `scooter`, `rollator`, `walkingAid`, `other` |
+| `dimensionsInUse` | Optional | `Dimensions` |
+| `dimensionsFolded` | Optional | `Dimensions` |
+| `emptyWeightKg` | Optional | number, minimum `0` |
+| `battery` | Optional | `Battery` |
+| `spareBattery` | Optional | `Battery` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### ServiceAnimal
+
+object with required `type`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `dog`, `miniatureHorse`, `other` |
+| `weightKg` | Optional | number, minimum `0` |
+| `tasks` | Optional | Array of One of `guiding`, `soundAlert`, `seizureAlert`, `medicalAlert`, `retrieval`, `bracing`, `psychiatricTasks`, unique entries |
+| `needsFloorSpace` | Optional | boolean |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### MedicalDevice
+
+object with required `deviceType`. A fact about a medical device the traveller brings.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `deviceType` | Required | One of `infusionPump`, `feedingPump`, `cpap`, `bipap`, `portableOxygenConcentrator`, `ventilator`, `nebuliser`, `suctionMachine`, `insulinPump`, `continuousGlucoseMonitor`, `dialysisMachine`, `other` |
+| `usedInTransit` | Optional | boolean |
+| `needsMainsPower` | Optional | boolean |
+| `battery` | Optional | `Battery` |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### EquipmentRequest
+
+object with required `equipment`, `strength`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `equipment` | Required | One of `manualWheelchair`, `powerWheelchair`, `scooter`, `showerChair`, `commode`, `hoist`, `bedRails`, `rollator`, `walkingAid`, `other` |
+| `minWidthM` | Optional | number, minimum `0` |
+| `minWeightCapacityKg` | Optional | number, minimum `0` |
+| `strength` | Required | `Strength` |
+| `rank` | Optional | integer, minimum `0`, maximum `100`. Optional tie-break among items of equal strength; higher wins. |
+| `contexts` | Optional | Array of `Context`, unique entries. Trip contexts the value applies to. Absent means any. |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### SleepingArrangement
+
+object with required `bedType`, `occupants`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `room` | Optional | integer, minimum `1` |
+| `bedType` | Required | One of `oversize`, `large`, `double`, `single`, `sofaBed`, `bunk`, `cot` |
+| `occupants` | Required | integer, minimum `1` |
+| `occupantType` | Optional | One of `adult`, `child`, `infant`, `mixed` |
+| `note` | Optional | string |
+
+### Pet
+
+object with required `type`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `dog`, `cat`, `other` |
+| `weightKg` | Optional | number, minimum `0` |
+| `note` | Optional | string |
+
+### LocalizableString
+
+string or object with required `translations`. 
+
+### Name
+
+object with required `primaryName`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `nameType` | Optional | One of `legal`, `preferred`, `passport`, `nickname`, `maiden`, `alias`, `professional` |
+| `prefix` | Optional | string |
+| `firstName` | Optional | `LocalizableString` |
+| `secondName` | Optional | `LocalizableString` |
+| `primaryName` | Required | `LocalizableString` |
+| `suffix` | Optional | string |
+| `nameDisplayRule` | Optional | One of `western`, `eastern`, `hispanic`, `middleEastern`, `custom` |
+| `pronouns` | Optional | Array of string |
+| `alias` | Optional | string |
+| `contexts` | Optional | Array of string |
+| `rank` | Optional | integer, minimum `0`, maximum `100` |
+
+### Phone
+
+object with required `type`, `number`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `mobile`, `home`, `work`, `fax`, `emergency`, `voip`, `other` |
+| `number` | Required | string, pattern `^\+[1-9][0-9]{1,14}$`. E.164 number including country calling code |
+| `countryCallingCode` | Optional | string, pattern `^\+[1-9][0-9]{0,2}$` |
+| `isMessageable` | Optional | boolean |
+| `isPrimary` | Optional | boolean |
+
+### Email
+
+object with required `type`, `address`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `personal`, `work`, `travel`, `emergency`, `other` |
+| `address` | Required | string, format `email` |
+| `isPrimary` | Optional | boolean |
+
+### Address
+
+object with required `type`, `country`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `type` | Required | One of `home`, `work`, `billing`, `shipping`, `mailing`, `seasonal`, `other` |
+| `streetAddress` | Optional | string |
+| `locality` | Optional | string |
+| `region` | Optional | string |
+| `postalCode` | Optional | string |
+| `country` | Required | string, pattern `^[A-Z]{2}$`. ISO 3166-1 alpha-2 country code |
+| `latitude` | Optional | number |
+| `longitude` | Optional | number |
+| `defaultAirport` | Optional | string, pattern `^[A-Z]{3}$` |
+| `isPrimary` | Optional | boolean |
+
+### ChannelPreference
+
+object with required `channel`, `strength`. Preferred method of contact. One entry per channel and address type.
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `channel` | Required | One of `voiceCall`, `sms`, `whatsapp`, `email`, `push`, `inApp`, `post`, `other` |
+| `addressType` | Optional | string. Phone or email type the channel uses, for example mobile, home, work, personal, other. |
+| `strength` | Required | `Strength` |
+| `rank` | Optional | integer, minimum `0`, maximum `100`. Optional tie-break among items of equal strength; higher wins. |
+| `contexts` | Optional | Array of `Context`, unique entries. Trip contexts the value applies to. Absent means any. |
+| `note` | Optional | string |
+| `meta` | Optional | `Meta` |
+
+### ConsentGrant
+
+object with required `granteeId`, `scope`, `purposes`, `grantedAt`, `actions`. 
+
+| Property | Presence in this object | Value |
+| --- | --- | --- |
+| `grantId` | Optional | string |
+| `granteeId` | Required | string. DID or stable identifier of the organisation or agent |
+| `granteeType` | Optional | One of `organisation`, `agent` |
+| `scope` | Required | Array of string, minimum items `1` |
+| `purposes` | Required | Array of One of `booking`, `servicing`, `dutyOfCare`, `accessibilityFulfilment`, `marketing`, `analytics`, `profiling`, `other`, minimum items `1`, unique entries |
+| `actions` | Required | Array of One of `read`, `write`, `delete`, `share`, minimum items `1`, unique entries. Explicit permissions. A legacy grant with missing or empty actions authorises no operation until explicitly reissued. |
+| `contexts` | Optional | Array of `Context`, unique entries |
+| `grantedBy` | Optional | object with required `role`. Who gave the consent. Absent means the traveller. Used for children and for adults who cannot consent themselves. |
+| `grantedAt` | Required | string, format `date-time` |
+| `expiresAt` | Optional | string, format `date-time` |
+| `revokedAt` | Optional | string, format `date-time` |
 
