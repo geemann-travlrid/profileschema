@@ -1,0 +1,7 @@
+{
+  "accessibility.arrivalEntryExit.minEntryDoorWidth": {
+    "value": 0.85,
+    "unit": "m"
+  },
+  "accessibility.bathroom.rollInShower": 100
+}

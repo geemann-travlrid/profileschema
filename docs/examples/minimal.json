@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileMetadata": {
+    "created": "2026-11-19T15:00:00Z",
+    "lastUpdated": "2026-11-19T15:00:00Z",
+    "status": "active"
+  },
+  "localizationSettings": {
+    "defaultLanguage": "en-GB"
+  },
+  "consentSettings": {
+    "grants": []
+  },
+  "travelerIdentity": {
+    "names": [
+      {
+        "primaryName": "Sample"
+      }
+    ]
+  }
+}

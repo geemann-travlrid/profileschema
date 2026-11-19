@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Consent | Travlr ID Global Traveler Profile</title><link rel="stylesheet" href="style.css"><body><header>Travlr ID / Developer documentation</header><nav aria-label="Documentation"><a href="index.html">Overview</a> <a href="quick-start.html">Quick start</a> <a href="field-reference.html">Field reference</a> <a href="graph-mapping.html">Graph mapping</a> <a href="consent.html">Consent</a> <a href="release-notes.html">Release</a></nav><main><h1 id="consent-and-hotel-fulfilment">Consent and hotel fulfilment</h1>
+<p>A hotel wants to check doorway width, shower access and refrigerated
+storage. In the <a href="examples/traveller.json">synthetic profile</a>,
+the guardian grants the example hotel group permission to read the
+doorway and shower fields for accessibility fulfilment. The example
+decision takes place on 20 November 2026, inside the grant's validity
+period.</p>
+<h2 id="evaluate-the-request">Evaluate the request</h2>
+<ol type="1">
+<li>Identify the traveller, requesting organisation or agent, intended
+action, purpose, context and requested canonical keys.</li>
+<li>For each field, find a single grant that satisfies every condition.
+A scope may match an exact key or a prefix ending at a dotted segment
+boundary. A grant for <code>accessibility.bath</code> cannot match
+<code>accessibility.bathroom</code>.</li>
+<li>Check the grant is active at the decision time. The start time is
+inclusive. Expiry and revocation take effect at their timestamps.
+Missing or empty actions confer no permission.</li>
+<li>For a guardian or legal representative, resolve the internal
+authority reference and verify current authority for this traveller and
+operation. A role and an identifier alone cannot establish that
+relationship.</li>
+<li>Return only the requested, authorised fulfilment values. Keep
+delegation evidence and internal notes out of the supplier
+response.</li>
+</ol>
+<h2 id="example-response">Example response</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;accessibility.arrivalEntryExit.minEntryDoorWidth&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="er">.</span><span class="dv">85</span><span class="fu">,</span> <span class="dt">&quot;unit&quot;</span><span class="fu">:</span> <span class="st">&quot;m&quot;</span><span class="fu">},</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;accessibility.bathroom.rollInShower&quot;</span><span class="fu">:</span> <span class="dv">100</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><a href="examples/hotel-payload.json">Download the expected
+payload</a>. This is a worked projection using dotted keys. The
+reference verifier uses a synthetic authority decision and a fixed
+request. Production implementations need their own requester
+authentication, grant store, delegation verification and enforcement. A
+separate onward disclosure requires the corresponding authority for the
+share operation.</p>
+</main></body></html>

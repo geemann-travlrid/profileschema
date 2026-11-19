@@ -1,0 +1,43 @@
+{
+  "schemaSHA256": "21108bbe56b8ea2c52da36d60f748f8a57705958cb8e650c32e38d53de79519a",
+  "passed": [
+    "Draft 2020-12 meta-schema",
+    "All embedded profiles validate",
+    "524 distinct canonical keys",
+    "Internal references resolve",
+    "Guardian must supply did",
+    "Guardian must supply authorityRef",
+    "Self grant may omit grantedBy",
+    "Actionless grant rejected",
+    "Empty actions rejected",
+    "Doorway is an inclusive mandatory minimum",
+    "Doorway round trip preserves supplied value and omitted strength",
+    "Exact hotel payload, excluding medical and authority records",
+    "Wrong recipient denied",
+    "Wrong purpose denied",
+    "Wrong action denied",
+    "Unverified delegate denied",
+    "Future grant denied",
+    "At expiry denied",
+    "Legacy actionless grant denied",
+    "Revoked grant denied",
+    "Partial key segment denied",
+    "Whole segment prefix accepted"
+  ],
+  "hotelPayload": {
+    "accessibility.arrivalEntryExit.minEntryDoorWidth": {
+      "value": 0.85,
+      "unit": "m"
+    },
+    "accessibility.bathroom.rollInShower": 100
+  },
+  "doorwayGraphExample": {
+    "key": "accessibility.arrivalEntryExit.minEntryDoorWidth",
+    "comparison": "gte",
+    "value": 0.85,
+    "unit": "m",
+    "mustHonor": true,
+    "effectiveStrength": 100,
+    "strengthExplicit": false
+  }
+}

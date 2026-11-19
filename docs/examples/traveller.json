@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "1.0.0",
+  "profileMetadata": {
+    "created": "2026-11-19T15:00:00Z",
+    "lastUpdated": "2026-11-19T15:00:00Z",
+    "status": "active"
+  },
+  "localizationSettings": {
+    "defaultLanguage": "en-GB"
+  },
+  "consentSettings": {
+    "grants": [
+      {
+        "granteeId": "did:example:hotel-group",
+        "granteeType": "organisation",
+        "scope": [
+          "accessibility.arrivalEntryExit.minEntryDoorWidth",
+          "accessibility.bathroom.rollInShower"
+        ],
+        "purposes": [
+          "accessibilityFulfilment"
+        ],
+        "grantedBy": {
+          "role": "parentOrGuardian",
+          "did": "did:example:guardian",
+          "authorityRef": "urn:example:authority:guardian-001"
+        },
+        "grantedAt": "2026-11-19T15:00:00Z",
+        "expiresAt": "2027-11-19T15:00:00Z",
+        "actions": [
+          "read"
+        ]
+      }
+    ]
+  },
+  "travelerIdentity": {
+    "did": "did:example:123456789abcdefghi",
+    "names": [
+      {
+        "nameType": "legal",
+        "firstName": "Alex",
+        "primaryName": "Sample",
+        "nameDisplayRule": "western"
+      }
+    ]
+  },
+  "contactInformation": {
+    "phones": [
+      {
+        "type": "mobile",
+        "number": "+447700900123"
+      }
+    ],
+    "emails": [
+      {
+        "type": "work",
+        "address": "alex.sample@example.com"
+      }
+    ]
+  },
+  "communicationPreferences": {
+    "preferredChannels": [
+      {
+        "channel": "whatsapp",
+        "addressType": "mobile",
+        "strength": 50
+      },
+      {
+        "channel": "voiceCall",
+        "addressType": "home",
+        "strength": -100
+      }
+    ]
+  },
+  "preferences": {
+    "air": {
+      "cabin": {
+        "business": {
+          "strength": 50,
+          "contexts": [
+            "business"
+          ]
+        },
+        "economy": 0
+      },
+      "seatPosition": {
+        "aisle": 80,
+        "nearLavatory": -40
+      },
+      "meals": [
+        {
+          "code": "VGML",
+          "strength": 100
+        }
+      ],
+      "airlines": [
+        {
+          "code": "BA",
+          "strength": 50
+        }
+      ],
+      "stops": {
+        "nonstop": 80
+      },
+      "tripDefaults": {
+        "checkedBagCount": 1
+      }
+    },
+    "lodging": {
+      "lodgingType": {
+        "fullServiceHotel": 50,
+        "hostel": -100
+      },
+      "amenities": {
+        "gym": 50,
+        "checkIn": {
+          "time": "14:00",
+          "strength": 50
+        },
+        "pool": {
+          "minLength": {
+            "value": 20,
+            "unit": "m",
+            "strength": 50
+          }
+        }
+      },
+      "unitFeatures": {
+        "location": {
+          "highFloor": 50
+        },
+        "beds": {
+          "oversize": 80,
+          "oversizeCount": 1
+        }
+      },
+      "brands": {
+        "brandPreferences": [
+          {
+            "code": "MC",
+            "codeScheme": "chainCode",
+            "name": "Marriott Hotels",
+            "strength": 50
+          }
+        ]
+      }
+    },
+    "rentalVehicle": {
+      "transmission": {
+        "automatic": 100
+      },
+      "powertrain": {
+        "electric": 50
+      },
+      "cover": {
+        "maxCollisionDeductible": {
+          "amount": 500,
+          "currency": "GBP"
+        }
+      }
+    }
+  },
+  "accessibility": {
+    "needs": [
+      "wheelchair"
+    ],
+    "ssrCodes": [
+      {
+        "code": "WCHC",
+        "strength": 100
+      }
+    ],
+    "arrivalEntryExit": {
+      "stepFreeRoute": 100,
+      "minEntryDoorWidth": {
+        "value": 0.85,
+        "unit": "m"
+      }
+    },
+    "bathroom": {
+      "rollInShower": 100,
+      "grabBarBehindToilet": 80
+    },
+    "mobilityEquipment": [
+      {
+        "deviceType": "powerWheelchair",
+        "dimensionsInUse": {
+          "width": 0.65,
+          "depth": 1.1,
+          "height": 0.95,
+          "unit": "m"
+        },
+        "emptyWeightKg": 120,
+        "battery": {
+          "type": "lithium",
+          "wattHours": 280,
+          "removable": true
+        }
+      }
+    ],
+    "hearing": {
+      "signLanguageInterpreters": [
+        {
+          "code": "bfi",
+          "strength": 50
+        }
+      ]
+    },
+    "continenceAndOstomy": {
+      "stomaFriendlyToilet": 100,
+      "seatNearLavatory": 80
+    },
+    "nutritionAndInfusion": {
+      "parenteralNutritionStorage": 100,
+      "dripStand": 80
+    },
+    "medicalSupplies": {
+      "minRefrigeratedVolume": {
+        "value": 40,
+        "unit": "l"
+      },
+      "devices": [
+        {
+          "deviceType": "infusionPump",
+          "needsMainsPower": true
+        }
+      ]
+    },
+    "careAndProximity": {
+      "carerInSameOrAdjoiningRoom": 100
+    }
+  },
+  "exposureSensitivities": {
+    "latexFree": 100
+  },
+  "dietary": {
+    "restrictions": [
+      {
+        "type": "allergy",
+        "item": "peanuts",
+        "severity": "lifeThreatening",
+        "strength": -100
+      }
+    ]
+  }
+}

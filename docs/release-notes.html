@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Release | Travlr ID Global Traveler Profile</title><link rel="stylesheet" href="style.css"><body><header>Travlr ID / Developer documentation</header><nav aria-label="Documentation"><a href="index.html">Overview</a> <a href="quick-start.html">Quick start</a> <a href="field-reference.html">Field reference</a> <a href="graph-mapping.html">Graph mapping</a> <a href="consent.html">Consent</a> <a href="release-notes.html">Release</a></nav><main><h1 id="global-traveler-profile-v100">Global Traveler Profile
+v1.0.0</h1>
+<p>First public edition, 19 November 2026. This release includes 524
+annotated canonical keys, a common preference-strength scale, measured
+accessibility requirements and grants scoped by recipient, action,
+purpose and field. The source combines earlier Travlr ID profile work
+with fields drawn from the 17 November 2026 Focus Areas working draft.
+This is a Travlr ID publication. Fields marked
+<code>x-status: strawman</code> retain their provisional vocabulary
+status.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Release file</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a
+href="traveler-profile/1.0.0/Global_Traveler_Profile_v1.0.0.zip">Release
+package</a></td>
+<td>Original distribution with schema, reference verifier and expected
+results.</td>
+</tr>
+<tr class="even">
+<td><a href="traveler-profile/1.0.0/schema.json">JSON Schema</a></td>
+<td>Machine-readable contract for version 1.0.0.</td>
+</tr>
+<tr class="odd">
+<td><a href="traveler-profile/1.0.0/verify.py">Verifier</a></td>
+<td>Runs against the adjacent schema.json in this repository.</td>
+</tr>
+<tr class="even">
+<td><a
+href="traveler-profile/1.0.0/validation-results.json">Results</a></td>
+<td>22 local checks and the expected hotel response.</td>
+</tr>
+</tbody>
+</table>
+<p>Schema SHA-256:
+<code>21108bbe56b8ea2c52da36d60f748f8a57705958cb8e650c32e38d53de79519a</code>.</p>
+<p>The declared schema identifier is
+<code>https://schema.travlrid.com/traveler-profile/1.0.0/schema.json</code>.
+Use the downloadable schema above for offline resolution. Earlier
+profiles require explicit field mapping. Grants inherited without
+actions authorise no operations until reissued.</p>
+</main></body></html>

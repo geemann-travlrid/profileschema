@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Graph mapping | Travlr ID Global Traveler Profile</title><link rel="stylesheet" href="style.css"><body><header>Travlr ID / Developer documentation</header><nav aria-label="Documentation"><a href="index.html">Overview</a> <a href="quick-start.html">Quick start</a> <a href="field-reference.html">Field reference</a> <a href="graph-mapping.html">Graph mapping</a> <a href="consent.html">Consent</a> <a href="release-notes.html">Release</a></nav><main><h1 id="graph-mapping">Graph mapping</h1>
+<p>Use each field's <code>x-key</code> as its canonical identifier and
+<code>x-kind</code> to distinguish a fact, trip default, preference or
+requirement. Preserve facts and trip defaults in their original roles.
+Keep explicit context, provenance, unit and strength where supplied.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Strength +100</td>
+<td>The condition must hold.</td>
+</tr>
+<tr class="even">
+<td>Strength -100</td>
+<td>The condition must be avoided.</td>
+</tr>
+<tr class="odd">
+<td>Strength 0</td>
+<td>Neutral.</td>
+</tr>
+<tr class="even">
+<td>Intermediate strength</td>
+<td>Soft preference with the indicated direction and magnitude.</td>
+</tr>
+<tr class="odd">
+<td>Measured limit without strength</td>
+<td>Effective strength +100. Retain the original omission when
+reconstructing the profile.</td>
+</tr>
+<tr class="even">
+<td>Other unscored requirement</td>
+<td>Mandatory requirement.</td>
+</tr>
+</tbody>
+</table>
+<p>For measurements, apply the field's <code>x-comparison</code> to the
+supplier value. Use inclusive comparison for <code>gte</code> and
+<code>lte</code> and equality for <code>eq</code>. Compare values in the
+declared unit.</p>
+<h2 id="doorway-example">Doorway example</h2>
+<p>A traveller supplies a minimum doorway width of 0.85 m and omits
+strength. The graph retains the minimum operator, value and unit, with
+effective strength +100. A confirmed width of 0.85 m meets that
+threshold. A confirmed width of 0.84 m falls below it. An unknown width
+needs confirmation. When serialising back to the traveller profile,
+preserve the original omission of strength.</p>
+<p>The <a
+href="traveler-profile/1.0.0/validation-results.json">validation
+results</a> include the example graph record. The <a
+href="field-reference.html">field reference</a> lists the keys available
+for mapping.</p>
+</main></body></html>

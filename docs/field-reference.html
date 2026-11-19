@@ -1,0 +1,3378 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Field reference | Travlr ID Global Traveler Profile</title><link rel="stylesheet" href="style.css"><body><header>Travlr ID / Developer documentation</header><nav aria-label="Documentation"><a href="index.html">Overview</a> <a href="quick-start.html">Quick start</a> <a href="field-reference.html">Field reference</a> <a href="graph-mapping.html">Graph mapping</a> <a href="consent.html">Consent</a> <a href="release-notes.html">Release</a></nav><main><h1 id="field-reference">Field reference</h1>
+<p>The schema has 21 top-level properties. Five are required. Each
+section below lists the annotated field keys it declares. The schema
+also defines nested properties, shared types and unannotated structural
+fields.</p>
+<h2 id="schemaversion">schemaVersion</h2>
+<p>Required.</p>
+<h2 id="profilemetadata">profileMetadata</h2>
+<p>Required.</p>
+<h2 id="localizationsettings">localizationSettings</h2>
+<p>Required.</p>
+<h2 id="consentsettings">consentSettings</h2>
+<p>Required. Consent held by the traveller. A value classified sensitive
+or specialCategory may be disclosed only to a grantee holding an
+unexpired, unrevoked grant whose scope covers its x-key. JSON Schema
+cannot enforce this; the disclosing system must. Evaluate each operation
+against a single valid grant matching grantee, action, purpose, any
+restricted context and exact key or whole dotted-segment prefix. Use
+grantedAt inclusively and expiry or revocation exclusively. For
+delegates verify current authority for the traveller and operation. Deny
+on missing or unverifiable authority. General consent flags cannot widen
+a grant. Project only the fulfilment fields requested and strip internal
+metadata.</p>
+<h2 id="traveleridentity">travelerIdentity</h2>
+<p>Required.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>travelerIdentity</code></td>
+<td>fact</td>
+<td>sensitive</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>travelerIdentity.racialIdentity</code></td>
+<td>fact</td>
+<td>specialCategory</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="contactinformation">contactInformation</h2>
+<p>Optional.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>contactInformation</code></td>
+<td>fact</td>
+<td>private</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="communicationpreferences">communicationPreferences</h2>
+<p>Optional.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>communicationPreferences</code></td>
+<td>preference</td>
+<td>private</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="traveldocuments">travelDocuments</h2>
+<p>Optional.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>travelDocuments</code></td>
+<td>fact</td>
+<td>sensitive</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="loyaltyprograms">loyaltyPrograms</h2>
+<p>Optional.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>loyaltyPrograms</code></td>
+<td>fact</td>
+<td>sensitive</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="preferences">preferences</h2>
+<p>Optional. Standing travel preferences, each expressed on the common
+strength scale</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>preferences.air.cabin</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Cabin</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.fareStrategy</code></td>
+<td>preference</td>
+<td>private</td>
+<td>How to choose a fare when cabin preferences leave it open</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.seatPosition</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Seat position</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.seatType</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Seat type</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.meals</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Meal preferences by IATA special meal code, for example VGML;
+airline-specific codes allowed</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.alliance</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Airline alliance</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.airlines</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Airline preferences by IATA airline designator</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.aircraftCategory</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Aircraft category</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.aircraftTypes</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Aircraft type preferences by IATA aircraft type code</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.stops</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Number of stops</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.loungeAccess</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Lounge access</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.earlyBoarding</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Early boarding</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.refundFlexibility</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Fare refund flexibility</td>
+</tr>
+<tr class="even">
+<td><code>preferences.air.changeFlexibility</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Fare change flexibility</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.air.tripDefaults.checkedBagCount</code></td>
+<td>tripDefault</td>
+<td>private</td>
+<td>Usual number of checked bags</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.hotel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Hotel</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.fullServiceHotel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full-service hotel</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.selectServiceHotel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Select-service hotel</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.limitedServiceHotel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Limited-service hotel</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.resort</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Resort</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.motel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Motel</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.boutiqueHotel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Boutique hotel</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.hostel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Hostel</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.campsite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Campsite</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.ranch</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Ranch</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.bedAndBreakfast</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bed and breakfast</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.glamping</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Glamping</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.lodgingType.vacationRentalUnit</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Vacation rental unit</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.lodgingType.wholeHomeRental</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Whole home rental</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.roomConfiguration.privateRoomWithBath</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Private room with bath</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.roomConfiguration.privateRoomWithSharedBath</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Private room with shared bath</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.roomConfiguration.sharedHostelRoom</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Shared hostel room</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyQuality.luxury</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Luxury</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyQuality.upscale</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Upscale</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyQuality.midscale</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Midscale</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyQuality.economy</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Economy</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyQuality.budget</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Budget</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyStyle.business</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Business</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyStyle.leisure</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Leisure</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyStyle.roadside</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Roadside</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyStyle.airport</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Airport</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyStyle.extendedStay</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Extended stay</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyStyle.hourlyStay</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Hourly stay</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyFocus.business</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Business</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyFocus.groupsAndMeetings</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Groups and meetings</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyFocus.families</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Families</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyFocus.couples</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Couples</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyFocus.singles</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Singles</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyFocus.adultsOnly</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Adults</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertyFocus.lgbtq</code></td>
+<td>preference</td>
+<td>specialCategory</td>
+<td>LGBTQ+</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertyFocus.faithBased</code></td>
+<td>preference</td>
+<td>specialCategory</td>
+<td>Faith-based</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertySize.singleUnit</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Single unit</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertySize.verySmall</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Very small, up to 15 rooms</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertySize.small</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Small, 16 to 50 rooms</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertySize.medium</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Medium, 51 to 200 rooms</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.propertySize.large</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Large, 201 to 750 rooms</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.propertySize.mega</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Mega, more than 750 rooms</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.brands.branded</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Branded property</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.brands.independent</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Independent property</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.brands.brandPreferences</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Preferences for named chains and brands; the brand and sub-brand
+tree is reference data held outside the profile</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.policies.minimumCheckInAge</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Highest minimum check-in age the traveller can meet</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.policies.prepaymentRequired</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Prepayment required</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.policies.usablePaymentTypes</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Payment types the traveller can use</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.policies.childFreeProperty</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Property does not accept children</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.policies.youngestChildAge</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Age of the youngest travelling child the property must accept</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.policies.petsAllowed</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Pets allowed</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.frontDesk24Hour</code></td>
+<td>preference</td>
+<td>private</td>
+<td>24-hour front desk</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.breakfastIncluded</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Breakfast included</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.onSiteRestaurant</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site restaurant</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.onSiteBreakfastRestaurant</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site breakfast restaurant</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.onSiteLunchRestaurant</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site lunch restaurant</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.onSiteDinnerRestaurant</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site dinner restaurant</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.onSiteCafe</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site coffee, snack or sandwich shop</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.onSiteBar</code></td>
+<td>preference</td>
+<td>private</td>
+<td>On-site bar</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.executiveLounge</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Club or executive lounge</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.elevator</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Elevator</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.gym</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Fitness centre</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.spa</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Spa</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.sauna</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Sauna</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.atm</code></td>
+<td>preference</td>
+<td>private</td>
+<td>ATM</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.foreignExchange</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Foreign exchange</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.luggageStorage</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Luggage storage</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.shop</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Gift shop, newsstand or grab-and-go</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.dailyHousekeeping</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Daily housekeeping</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.limitedHousekeeping</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Limited housekeeping</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.roomService24Hour</code></td>
+<td>preference</td>
+<td>private</td>
+<td>24-hour room service</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.roomServiceLimitedHours</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Room service with limited hours</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.parking.freeOnsite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free onsite parking</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.parking.freeNearby</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free nearby parking</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.parking.freeStreet</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free street parking</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.parking.paidOnsite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid onsite parking</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.parking.paidNearby</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid nearby parking</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.parking.freeValet</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free valet parking</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.parking.paidValet</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid valet parking</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.laundry.paidSelfService</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid self-service laundry</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.laundry.paidLaundryAndDryCleaning</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid laundry and dry cleaning</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.bellService</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bell service</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.conciergeDesk</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Concierge desk</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.casino</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Casino</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.businessCentre</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Business centre</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.gameRoom</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Game room</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.beach.beachfront</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Beachfront property</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.beach.maxDistanceToBeach</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Maximum distance to the beach</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.beach.cabanaRental</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Cabana rentals</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.beach.umbrellaRental</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Umbrella rentals</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.beach.freeUmbrellas</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free beach umbrellas</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.beach.freeChairs</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free beach chairs</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.beach.chairRental</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Beach chair rental</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.pool.indoor</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Indoor pool</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.pool.outdoorUnheated</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Outdoor unheated pool</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.pool.outdoorHeated</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Outdoor heated pool</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.pool.minLength</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Minimum pool length</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.pool.reservableLanes</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Reservable lanes</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.pool.minDepth</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Minimum pool depth</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.pool.maxDepth</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Maximum pool depth</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.pool.adultOnlyHours</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Adult-only hours</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.amenities.checkIn</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Earliest check-in time needed and how much it matters</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.amenities.checkOut</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Latest check-out time needed and how much it matters</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.standard</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Standard</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.conciergeLevel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Concierge level</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.juniorSuite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Junior suite</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.fullSuite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full suite</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.premiumSuite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Premium suite</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.connectingRooms</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Connecting rooms, when two or more rooms are requested</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.sharedDormitory</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Shared hostel, dormitory or bunkroom</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.partialHouse</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Partial house</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.fullHouse</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full house</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.cabin</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Cabin</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.mobileUnit</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Rental RV or trailer, typically on a campsite</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.pullThroughRvSite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Pull-through RV site</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitTypes.stubRvSite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Stub RV site</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitTypes.tentSite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Tent site</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.accessibleRoom</code></td>
+<td>preference</td>
+<td>specialCategory</td>
+<td>Accessible room</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.hearingAccessibleRoom</code></td>
+<td>preference</td>
+<td>specialCategory</td>
+<td>Hearing-accessible room</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bathroom.ensuite</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Ensuite bathroom</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bathroom.privateOutsideUnit</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Private bathroom outside the unit</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bathroom.shared</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Shared bathroom</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bathroom.bathtubWithShower</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bathtub with shower</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bathroom.bathtubWithoutShower</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bathtub without shower</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bathroom.walkInShower</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Walk-in shower</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bathroom.jacuzziTub</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Jacuzzi tub</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bathroom.bidet</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bidet</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.freeWifi</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Free wifi</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.paidWifi</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paid wifi</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.cellularSignal</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Cellular network signal</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.balcony</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Balcony</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.walkOutPatio</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Walk-out patio</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.fireplace</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Fireplace</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.kitchen.coffeeMaker</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Coffee maker</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.kitchen.kitchenette</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Kitchenette</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.kitchen.fullKitchen</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full kitchen</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.kitchen.microwave</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Microwave</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.kitchen.fullRefrigeratorFreezer</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full refrigerator and freezer</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.kitchen.miniRefrigerator</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Mini refrigerator</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.kitchen.stove</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Stove</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.kitchen.oven</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Oven</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.kitchen.diningTable</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Dining table</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.kitchen.diningTableCapacity</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Dining table capacity needed</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.safe</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Safe</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.ironAndBoard</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Iron and ironing board</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.hairDryer</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Hair dryer</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.television</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Television</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.tvCastingFromGuestDevices</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Television supports streaming from guest devices</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.tvGuestStreamingAccounts</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Television gives access to guest streaming accounts</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.radio</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Radio</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.washingMachine</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Washing machine</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.clothesDryer</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Clothes dryer</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.workDesk</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Work desk</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.seatingArea</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Seating area</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.seatingAreaCapacity</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Seating area capacity needed</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.smokingPermitted</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Smoking permitted</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.interiorHallway</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Interior hallway</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.exteriorEntrance</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Exterior entrance</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.mosquitoNetting</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Mosquito netting</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.beds.oversize</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Oversize bed, for example king</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.beds.oversizeCount</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Number of oversize beds</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.beds.large</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Large bed, for example queen</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.beds.largeCount</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Number of large beds</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.beds.double</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Smaller double bed</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.beds.doubleCount</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Number of smaller double beds</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.beds.single</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Single bed, for example twin</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.beds.singleCount</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Number of single beds</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.beds.sofaBed</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Sofa bed</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.nearElevator</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Near elevator</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.location.awayFromElevator</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Away from elevator</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.nearExitStairs</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Near exit stairs</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.location.nearVending</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Near vending</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.awayFromVending</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Away from vending</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.location.highFloor</code></td>
+<td>preference</td>
+<td>private</td>
+<td>High floor</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.lowFloor</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Low floor</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.location.groundFloor</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Ground floor</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.nearGym</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Near gym</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.location.nearPool</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Near pool</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.location.awayFromHighway</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Away from highway</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.view.city</code></td>
+<td>preference</td>
+<td>private</td>
+<td>City view</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.view.mountain</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Mountain view</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.view.golfCourse</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Golf course view</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.view.pool</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Pool view</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.view.beachfront</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Beachfront unit</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.view.oceanOrWater</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Ocean or water view</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.view.partialOceanOrWater</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Partial ocean or water view</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.view.orientationDegrees</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Preferred view orientation in compass degrees</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bedding.foamPillow</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Foam pillow</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bedding.featherPillow</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Feather pillow</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bedding.childproofUndersheet</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Childproof undersheet</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.bedding.hypoallergenicBedding</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Hypoallergenic bedding (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.bedding.naturalFibreBedding</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Natural fibre bedding (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.cableTvCoax</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Cable TV coax connection</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.electrical</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Electrical service needed</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.powerIncluded</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Power included in price</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.water</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Water supply needed</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.fullSewerHookup</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full sewer hookup</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.dumpStation</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Dump station</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.sewerHookupSide</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Side of vehicle for the sewer hookup</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.skySatelliteView</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Clear sky or satellite view</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.slideOutAwningClearance</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Slide-out and awning clearance needed</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.pavedSurface</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Paved surface</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.rvSite.gravelSurface</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Gravel surface</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.rvSite.grassSurface</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Grass surface</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.tentSite.tentProvided</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Tent provided</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.unitFeatures.tentSite.naturalSurface</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Natural surface</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.unitFeatures.tentSite.platformSurface</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Platform surface</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.tripDefaults.guestCount</code></td>
+<td>tripDefault</td>
+<td>private</td>
+<td>Usual number of guests</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.tripDefaults.bedroomCount</code></td>
+<td>tripDefault</td>
+<td>private</td>
+<td>Usual number of bedrooms for a suite or connecting rooms</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.tripDefaults.rvLength</code></td>
+<td>tripDefault</td>
+<td>private</td>
+<td>Length of the traveller's RV</td>
+</tr>
+<tr class="even">
+<td><code>preferences.lodging.tripDefaults.pets</code></td>
+<td>fact</td>
+<td>private</td>
+<td>Pets that usually travel</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.lodging.tripDefaults.sleepingArrangements</code></td>
+<td>tripDefault</td>
+<td>private</td>
+<td>Who sleeps where, for family and group stays (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.sizeClass</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Vehicle size class</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.acrissCodes</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Preferences by four-letter ACRISS vehicle code</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.sedan4Door</code></td>
+<td>preference</td>
+<td>private</td>
+<td>4-door sedan</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.bodyStyle.sedan2Door</code></td>
+<td>preference</td>
+<td>private</td>
+<td>2-door sedan</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.hatchback4Door</code></td>
+<td>preference</td>
+<td>private</td>
+<td>4-door hatchback</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.bodyStyle.hatchback2Door</code></td>
+<td>preference</td>
+<td>private</td>
+<td>2-door hatchback</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.compactSuv</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Compact SUV</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.bodyStyle.fullSizeSuv</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full-size SUV</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.offRoadSuv</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Off-road SUV</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.bodyStyle.minivan</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Minivan</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.convertible</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Convertible</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.bodyStyle.pickup</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Pickup</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.bodyStyle.van</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Van</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.cover.fullCollision</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full collision cover</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.cover.collisionWithDeductible</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Collision cover with deductible</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.cover.maxCollisionDeductible</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Maximum collision deductible</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.cover.fullTheft</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full theft cover</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.cover.theftWithDeductible</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Theft cover with deductible</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.cover.maxTheftDeductible</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Maximum theft deductible</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.cover.fullLiability</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Full liability cover</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.cover.roadsideAssistance</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Roadside assistance</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.equipment.childSeat</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Child seat</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.equipment.gpsNavigation</code></td>
+<td>preference</td>
+<td>private</td>
+<td>GPS navigation</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.equipment.appleCarPlayUsbA</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Apple CarPlay over USB-A</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.equipment.appleCarPlayUsbC</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Apple CarPlay over USB-C</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.equipment.appleCarPlayBluetooth</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Apple CarPlay over Bluetooth</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.equipment.androidAutoUsbA</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Android Auto over USB-A</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.equipment.androidAutoUsbC</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Android Auto over USB-C</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.equipment.androidAutoBluetooth</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Android Auto over Bluetooth</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.prepaidFuel</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Prepaid refuelling option</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.minBootSpace</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Minimum boot or trunk space</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.transmission</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Transmission</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.powertrain</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Powertrain</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.suppliers</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Rental company preferences</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.specialVehicles.motorhome</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Motorhome or RV (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.specialVehicles.campervan</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Campervan (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.specialVehicles.towableTrailer</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Towable trailer or caravan (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.rentalVehicle.specialVehicles.snowmobile</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Snowmobile (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.rentalVehicle.specialVehicles.motorcycle</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Motorcycle (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.restaurant.seating.booth</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Booth (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.restaurant.seating.chairsWithArms</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Chairs with arms (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.restaurant.seating.chairsWithoutArms</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Chairs without arms (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.restaurant.seating.stableSeating</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Stable, non-swivel seating (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.restaurant.seating.highTop</code></td>
+<td>preference</td>
+<td>private</td>
+<td>High-top table (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>preferences.restaurant.seating.bar</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Bar seating (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>preferences.restaurant.seating.fixedSeating</code></td>
+<td>preference</td>
+<td>private</td>
+<td>Fixed seating (strawman)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="otherpreferences">otherPreferences</h2>
+<p>Optional. Keyed preferences for travel categories that do not yet
+have a structured section. Graduates into preferences once the keys are
+agreed.</p>
+<h2 id="accessibility">accessibility</h2>
+<p>Optional. Accessibility information and needs. Every item is special
+category data and may only be disclosed under an explicit consent
+grant</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>accessibility.needs</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Summary flags for systems that only accept coarse categories</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.ssrCodes</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>IATA special service request codes to send, for example WCHR</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.assistiveTechnology</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Assistive technologies the traveller uses, for example screen
+readers</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.notes</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Free-text assistance notes</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.stepFreeRoute</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Step-free route</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.maxStepHeight</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Maximum height of steps, kerbs or lips on a step-free route</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.levelDropOffSideRamp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Drop-off on a level surface with room to deploy a side ramp or
+lift</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.levelDropOffRearRamp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Drop-off on a level surface with room to deploy a rear ramp or
+lift</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.parkingExtraWidth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Parking with extra width</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.parkingAccessAisle</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Parking with access aisle</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.minParkingClearance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum parking vertical clearance</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.minEntryDoorWidth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum entry door width</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.automaticOrLowForceEntryDoor</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Automatic or low-force entry door</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.nonRevolvingDoor</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Non-revolving door always usable</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.maxRampSlope</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Maximum ramp slope</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.rampHandrails</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Ramp handrails</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.rampEdgeProtection</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Ramp edge protection</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.rampRestLandings</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Ramp rest landings</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.minLiftWidth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum elevator or lift width</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.minLiftDepth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum elevator or lift depth</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.liftControlsReachableSeated</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Elevator or lift controls reachable from a seated position</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.fallbackRouteIfLiftFails</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Fallback route if the elevator or lift fails</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.maxWalkingDistanceWithoutRest</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Maximum walking distance without rest points</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.queueSeating</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating areas at any queues</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.seatedHeightServiceCounter</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Desk or counter service suitable for a seated guest</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.stairHandrailsBothSides</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Stair handrails on both sides</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.slipResistantSurfaces</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Slip-resistant surfaces</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.noRoughSurfaces</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No rough surfaces such as deep pile carpet, gravel or sand</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.arrivalEntryExit.weatherProtectedRoutes</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Weather-protected routes with snow and ice cleared</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.arrivalEntryExit.transportForLongerDistances</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Transport available for longer distances</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.minDoorCorridorWidth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum door and corridor width</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.noHeavyManualDoors</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No heavy doors without automation</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.manoeuvringSpaceAtDoors</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Manoeuvring space on both sides of doors</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.restaurantTableAndRestroomAccess</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Access to tables and restroom in restaurants</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.tablesWithKneeClearance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Tables with knee clearance</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.minTurningSpace</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum turning space within a room</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.clearFloorTransferSideOfBed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Clear floor space on the transfer side of the bed</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.minBedSurfaceHeight</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum bed surface height</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.maxBedSurfaceHeight</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Maximum bed surface height</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.controlsReachableSeated</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Room controls, switches, peephole, closet rods and hooks reachable
+from a seated position</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.controlsReachableFromBed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Room controls and light switches reachable from the bed</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.controlsOperableWithoutGrip</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Controls operable with one hand, a closed fist or no grip strength,
+without pinching or twisting</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.leverHandles</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Lever handles instead of knobs</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.deskCounterKneeClearance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Desk and counters with knee clearance</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.bedRails</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Bed rails</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.bedAssistHandles</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Bed assist handles</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.operableWithLimitedGrip</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Doors, buttons, switches, touchscreens and payment terminals
+operable with limited grip</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.operableWithOneHand</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Doors, buttons, switches, touchscreens and payment terminals
+operable with one hand</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityIndoors.operableWithNoHandFunction</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Doors, buttons, switches, touchscreens and payment terminals
+operable with no hand function</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.mobilityIndoors.luggageAssistance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Luggage assistance</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.carryingAndOpeningAssistance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Help carrying trays, plates and drinks and opening condiments and
+sealed containers</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.adaptiveCutlery</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Adaptive cutlery</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.cupsWithHandles</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Cups with handles</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.cupsWithLids</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Cups with lids</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.plateGuards</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Plate guards</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.nonSlipMats</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Non-slip mats</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.buffetWithinReachOrServed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Buffet items within reach, or staff to serve</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.oneHandedServingUtensils</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Lids, tongs and utensils usable one-handed</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.alternativesToQrOrdering</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Alternatives to QR code ordering</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.nearRestroom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating near the restroom</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.awayFromDraughts</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating away from draughts</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.awayFromHeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating away from heat</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.awayFromDoorTraffic</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating away from door traffic</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.awayFromStrongSmells</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating away from strong smells</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.foodCutUp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Food cut up</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.eating.drinksThickened</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Drinks thickened</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.eating.formulaPreparationFacilities</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Hot water and a clean space for formula preparation, including tube
+feeding</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.general.formAssistance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Help completing handwritten forms, or an alternative to a
+signature</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.general.priorityQueueOrPreboarding</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Priority or separate queues, preboarding or similar</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.general.minWeightCapacity</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum weight capacity of seats, beds and toilets</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.general.raisableArmrests</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Raisable armrests on chairs</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.general.noTurnstiles</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No turnstiles</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.transport.seatBeltExtender</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seat belt extender</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.transport.extraSeatWidthOrSecondSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Extra seat width or a second seat</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.transport.lavatoryAssistance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Bathroom assistance</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.rollInShower</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Curbless roll-in shower</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.transferShower</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Transfer shower</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.bathWithTransferSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Bath with transfer seat</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.foldDownShowerSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Fold-down shower seat</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.freestandingShowerChair</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Freestanding shower chair</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.minShowerChairWidth</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum shower chair width</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.minShowerChairWeightCapacity</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum shower chair weight capacity</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.handheldShowerOnSlideBar</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Handheld shower head on slide bar</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.reachableShowerControls</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Reachable shower and bath controls</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.grabBarShowerSideVertical</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vertical grab bar on the side shower or bath wall</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.grabBarShowerSideHorizontal</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Horizontal grab bar on the side shower or bath wall</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.grabBarShowerRearVertical</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vertical grab bar on the rear shower or bath wall</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.grabBarShowerRearHorizontal</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Horizontal grab bar on the rear shower or bath wall</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.grabBarBehindToilet</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Grab bar behind the toilet</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.grabBarToiletTransferSide</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Toilet grab bar on the transfer side</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.minGrabBarLoadRating</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum grab bar load rating</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.raisedToiletSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Raised toilet seat</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.overToiletFrameOrCommode</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Over-toilet frame or commode chair</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.minToiletSideClearance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum toilet side clearance on the transfer side</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.flushReachableFromSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Toilet flush control reachable from the seat</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.caregiverSpace</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Additional space for a caregiver</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.sinkKneeClearance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Sink with knee clearance</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.leverTaps</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Lever taps on the sink</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.reachableSoap</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Reachable soap at the sink</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.mirrorUsableSeatedOrStanding</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Mirror usable seated or standing</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.reachableTowelHooks</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Reachable towel hooks</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.slipResistantFloor</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Slip-resistant floor</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.noRaisedThreshold</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No raised floor threshold</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.bathroom.floorDrainage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Drainage for standing water</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.bathroom.emergencyPullCord</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Emergency pull cord reachable from the shower, toilet and floor</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.sleeping.adjustableBed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Adjustable bed, head and foot</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.sleeping.spaceForOwnBed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Room for the traveller's own hospital-style bed</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.sleeping.firmOrPressureRelievingMattress</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Firm or pressure-relieving mattress</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.sleeping.extraPillowsOrWedges</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Extra pillows or wedges</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.guestRoom.tactileAudibleOrVoiceControls</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>In-room controls with tactile or audible markings or voice
+control</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.mobilityEquipment</code></td>
+<td>fact</td>
+<td>specialCategory</td>
+<td>Mobility equipment the traveller brings</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.storageSpace</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Parking or storage space for the equipment</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.chargingPower</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Power available for charging</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.vehicleLoadingRamp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vehicle loading ramp</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.vehicleTieDowns</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vehicle device tie-downs</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.vehicleRideInChair</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vehicle avoids the need to transfer out of the chair</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.standPivotTransfer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Stand-pivot transfer</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.slideBoardTransfer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Slide board transfer</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.personalHoistTransfer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Personal hoist transfer</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.providerHoistTransfer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Provider hoist transfer</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.staffTrainedForTransfer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Staff trained in the transfer technique</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.aisleChairOrBoardingLift</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Aisle chair, boarding ramp or lift for narrow aisles</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentHandling.deliveredAtAircraftDoor</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Equipment delivered at the aircraft door after the flight</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.equipmentHandling.loanerIfDamagedOrLost</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Loaner if the device is damaged, delayed or lost</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.vision.orientationWalkThrough</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Walk-through of relevant facilities on arrival</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.vision.tactileOrBrailleSignage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Tactile or Braille signage</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.vision.liftFloorAnnouncements</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Elevator floor announcements</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.vision.accessibleMaterials</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Printed materials available in an accessible format</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.vision.accessibleFormats</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Accessible formats the traveller can use</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.vision.accessibleKiosksOrAlternative</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Kiosks enabled for low vision, or alternatives</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.vision.verbalSafetyAnnouncements</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Verbal safety announcements and warnings</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.vision.litPathToBathroom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Lit path to the bathroom at night</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.vision.seatingAwayFromGlare</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seating away from windows and glare</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.vision.sightedGuide</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Sighted guide (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.signLanguageInterpreters</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Sign language interpreters by ISO 639-3 code, for example ase, bfi,
+fsl</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.liveCaptioning</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Live captioning</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.nonVoiceAlternatives</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Alternatives to intercom-only entry, voice-only ordering or
+spoken-only announcements</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.hearingLoops</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Hearing loops</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.guideMicrophones</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Tour guides use microphones</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.guideWrittenMaterials</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Tour guides provide written scripts or visual materials</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.quietRestaurantTable</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Quiet table in restaurants</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.quietRoom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Quiet room</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.visualOrVibratingDoorAlerts</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Visual or vibrating alert for door knock, doorbell and room
+phone</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.vibratingOrFlashingWakeAlarm</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Vibrating or flashing alarm clock, bed shaker or pillow
+vibrator</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.hearing.visualAndVibratingFireAlarms</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Visual and vibrating fire and emergency alarms in room and
+bathroom</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.hearing.textAlerts</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Text alerts for urgent announcements</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.continuousBedsidePower</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Continuous power at the bed for medical devices</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.distilledWater</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Distilled water source</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.portableOxygen</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Portable oxygen equipment</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.medicationStorage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Medication and supply storage</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.medicationStorageMinTemp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum storage temperature</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.medicationStorageMaxTemp</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Maximum storage temperature</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.freezerForIcePacks</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Freezer for ice packs</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.backupFreezer</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Backup freezer if the main freezer fails</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.sharpsDisposal</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Sharps container and disposal</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.privateSpaceForMedication</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Private clean place to inject or take medication</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.lockableMedicineStorage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Secure lockable storage for controlled or valuable medicines</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.nearbyPharmacy</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Nearby backup pharmacy</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.medicalWasteDisposal</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Waste disposal for catheter, ostomy and injection supplies</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.handheldBidet</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Handheld bidet</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.unrestrictedNearbyRestroom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Nearby unrestricted restroom</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.roomTemperatureControl</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Control of room temperature</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.bathroomDoorOpenableFromOutside</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Bathroom door openable from outside</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.lowOrPaddedSleepingSurface</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Low or padded sleeping surface</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalLogistics.snacksOrGlucoseAvailable</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Snacks or glucose available in every setting</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalLogistics.alternativeSecurityScreening</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Alternative security screening for implanted devices</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.serviceAnimals</code></td>
+<td>fact</td>
+<td>specialCategory</td>
+<td>Service animals that travel with the traveller</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.serviceAnimalFacilities.reliefArea</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Relief area</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.serviceAnimalFacilities.accessibleReliefArea</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Relief area the traveller can reach given their own limitations</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.serviceAnimalFacilities.waitingArea</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Waiting area for service animals, for example near rides</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.equipmentLoanOrRental</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Equipment the traveller needs the provider to lend or rent
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.oxygen.ownConcentratorOnBoard</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Traveller's own portable oxygen concentrator permitted and usable on
+board (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.oxygen.providerOxygenInTransit</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Oxygen supplied by the carrier during the journey (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.oxygen.oxygenDeliveredAtDestination</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Oxygen delivered to the accommodation (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.oxygen.flowRate</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Prescribed flow rate (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalSupplies.medicalBaggageAllowance</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Extra baggage allowance for medical supplies and equipment
+(strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalSupplies.suppliesKeptInCabin</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Medication and medical supplies kept with the traveller in the cabin
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalSupplies.medicalLiquidsThroughSecurity</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Medical liquids, feeds and gels above the standard limit carried
+through security (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalSupplies.suppliesDeliveredAhead</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Property accepts and stores medical supplies delivered before
+arrival (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalSupplies.dedicatedMedicalFridge</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Refrigerator reserved for medical items, not a minibar
+(strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalSupplies.minRefrigeratedVolume</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Minimum refrigerated storage volume (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.medicalSupplies.powerAtSeat</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Power at the seat for a medical device (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.medicalSupplies.devices</code></td>
+<td>fact</td>
+<td>specialCategory</td>
+<td>Medical devices the traveller brings (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.nutritionAndInfusion.parenteralNutritionStorage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Refrigerated storage for parenteral nutrition bags (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.nutritionAndInfusion.enteralFeedStorage</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Storage for enteral feeds (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.nutritionAndInfusion.dripStand</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Drip stand or IV pole (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.nutritionAndInfusion.cleanSurfaceAndSinkForLineCare</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Clean wipeable surface and hand-washing sink for aseptic line care
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.nutritionAndInfusion.visitingNurseAccess</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Visiting nurse or carer given access to the room (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.nutritionAndInfusion.clinicalWasteCollection</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Clinical waste collection (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.continenceAndOstomy.toiletAtShortNotice</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Access to a toilet at short notice (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.continenceAndOstomy.seatNearLavatory</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Seat near a lavatory (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.continenceAndOstomy.stomaFriendlyToilet</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Toilet with shelf, hook, mirror and disposal bin for changing a
+stoma bag (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.continenceAndOstomy.adultChangingFacility</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Changing facility with adult-sized bench and hoist (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.continenceAndOstomy.privateChangingSpace</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Private space to change a bag or pad (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.continenceAndOstomy.waterproofMattressProtector</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Waterproof mattress protector (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.continenceAndOstomy.extraLinenAndTowels</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Extra linen and towels (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.continenceAndOstomy.laundryAtShortNotice</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Laundry access at short notice (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.careAndProximity.carerInSameOrAdjoiningRoom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Parent or carer in the same or an adjoining room (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.careAndProximity.carerSeatedAdjacent</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Parent or carer seated next to the traveller (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.careAndProximity.carerAdmittedEverywhere</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Carer admitted wherever the traveller goes, including treatment and
+security areas (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.careAndProximity.cotOrCrib</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Cot or crib (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.careAndProximity.hospitalNearby</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Hospital with relevant specialist care nearby (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.careAndProximity.dialysisCentreNearby</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Dialysis centre nearby (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.careAndProximity.enhancedCleaning</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Enhanced cleaning for an immunocompromised traveller (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.quietSpace</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Quiet space available (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.lowStimulationRoom</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Room with low noise, light and smell (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.avoidCrowdsAndQueues</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Routes and timings that avoid crowds and queues (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.advanceNoticeOfChanges</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Advance notice of changes to plans (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.plainLanguageInformation</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Information in plain language (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.easyReadMaterials</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Easy-read materials (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.visualGuideBeforeArrival</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Pictures or a visual guide of the place before arrival
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.stepByStepInstructions</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Written step-by-step instructions (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.extraTime</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Extra time for check-in, boarding and similar processes
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.singleNamedContact</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>One named staff contact throughout (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.staffTrainedInHiddenDisabilities</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Staff trained in non-visible disabilities (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.hiddenDisabilityIdentifierRecognised</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Hidden disability identifier recognised by staff (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.companionStaysWithTraveller</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Companion stays with the traveller at all times (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.privateOrInRoomCheckIn</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Private or in-room check-in (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.clearWayfinding</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Clear, consistent signage and wayfinding (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.noFlashingLights</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No flashing or strobe lighting (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.warningOfLoudNoises</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Warning before alarms tests and other loud noises (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>accessibility.cognitiveAndSensory.dimmableLighting</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Dimmable lighting (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>accessibility.cognitiveAndSensory.blackoutCurtains</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Blackout curtains (strawman)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exposuresensitivities">exposureSensitivities</h2>
+<p>Optional. Air, chemical and allergen exposure. Special category
+data</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>exposureSensitivities.fragranceAndChemicalFree</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No air fresheners, scented cleaning or laundry products, potpourri,
+pesticide spraying, fresh paint or new carpet</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.awayFromSmokeChlorineKitchenLaundry</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Not near smoking rooms or areas, chlorinated pools, kitchens or
+laundries</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.openableWindows</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Windows that open</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.airFiltration</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Air filtration</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.hardFlooring</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Hard flooring</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.featherFreeBedding</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Feather and down-free bedding</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.dustMiteCovers</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Dust-mite covers</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.noRecentPets</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No recent pets in the unit</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.latexFree</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No latex</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.fragranceFreeSoap</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No soap fragrances or additives</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.aloeFree</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No aloe</td>
+</tr>
+<tr class="even">
+<td><code>exposureSensitivities.nonAllergenicSoap</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Non-allergenic soap provided (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>exposureSensitivities.cleaningProductsDisclosed</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Cleaning products used disclosed on request (strawman)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dietary">dietary</h2>
+<p>Optional. Food allergies, intolerances and diets. Airline meal codes
+sit in preferences.air.meals</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dietary.prescribedDiets</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Medically prescribed diets; others go in restrictions
+(strawman)</td>
+</tr>
+<tr class="even">
+<td><code>dietary.sensoryFoodNeeds.plainPredictableFoods</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Plain, predictable foods (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>dietary.sensoryFoodNeeds.itemsServedSeparately</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Items served separately (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>dietary.sensoryFoodNeeds.noMixedOrTouchingFoods</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>No mixed or touching foods (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>dietary.sensoryFoodNeeds.ownFoodPermitted</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Traveller's own food permitted (strawman)</td>
+</tr>
+<tr class="even">
+<td><code>dietary.sensoryFoodNeeds.ownFoodStorageAndHeating</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Storage and heating for the traveller's own food (strawman)</td>
+</tr>
+<tr class="odd">
+<td><code>dietary.restrictions</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="health">health</h2>
+<p>Optional. Free-text health conditions and needs not covered by the
+structured accessibility section.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>health</code></td>
+<td>requirement</td>
+<td>specialCategory</td>
+<td>Free-text health conditions and needs not covered by the structured
+accessibility section.</td>
+</tr>
+</tbody>
+</table>
+<h2
+id="culturalandreligiousinformation">culturalAndReligiousInformation</h2>
+<p>Optional.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Canonical key</th>
+<th>Kind</th>
+<th>Classification</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>culturalAndReligiousInformation</code></td>
+<td>fact</td>
+<td>specialCategory</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="travelcharacteristics">travelCharacteristics</h2>
+<p>Optional.</p>
+<h2 id="relationships">relationships</h2>
+<p>Optional.</p>
+<h2 id="platformids">platformIDs</h2>
+<p>Optional.</p>
+<h2 id="securitysettings">securitySettings</h2>
+<p>Optional.</p>
+<h2 id="extensions">extensions</h2>
+<p>Optional. Namespaced custom data.</p>
+</main></body></html>

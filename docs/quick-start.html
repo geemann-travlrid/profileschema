@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quick start | Travlr ID Global Traveler Profile</title><link rel="stylesheet" href="style.css"><body><header>Travlr ID / Developer documentation</header><nav aria-label="Documentation"><a href="index.html">Overview</a> <a href="quick-start.html">Quick start</a> <a href="field-reference.html">Field reference</a> <a href="graph-mapping.html">Graph mapping</a> <a href="consent.html">Consent</a> <a href="release-notes.html">Release</a></nav><main><h1 id="quick-start">Quick start</h1>
+<p>Use the <a href="traveler-profile/1.0.0/schema.json">v1.0.0
+schema</a> with a JSON Schema Draft 2020-12 validator. Set the profile's
+<code>schemaVersion</code> to <code>1.0.0</code>. The following commands
+run from the repository root with Python 3.11 or newer.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> .venv/bin/activate</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="st">&#39;jsonschema[format]&gt;=4.18,&lt;5&#39;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> docs/traveler-profile/1.0.0/verify.py</span></code></pre></div>
+<p>The verifier prints the schema checksum, the checks it passed, the
+example hotel payload and the doorway graph record. <a
+href="traveler-profile/1.0.0/validation-results.json">Download the
+expected results</a>.</p>
+<h2 id="validate-a-profile">Validate a profile</h2>
+<p>Begin with the <a href="examples/minimal.json">minimal profile</a>.
+It supplies the five required sections and an empty grants array.
+Replace the example path below to validate your own record. Format
+checking is explicit.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jsonschema <span class="im">import</span> Draft202012Validator</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> Path(<span class="st">&quot;docs&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>schema <span class="op">=</span> json.loads((root <span class="op">/</span> <span class="st">&quot;traveler-profile/1.0.0/schema.json&quot;</span>).read_text())</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>profile <span class="op">=</span> json.loads((root <span class="op">/</span> <span class="st">&quot;examples/minimal.json&quot;</span>).read_text())</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>validator <span class="op">=</span> Draft202012Validator(schema, format_checker<span class="op">=</span>Draft202012Validator.FORMAT_CHECKER)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>validator.validate(profile)</span></code></pre></div>
+<p>For a fuller integration fixture, use the <a
+href="examples/traveller.json">synthetic traveller</a>. Keep a local
+copy of the versioned schema in a validating service so that input
+validation can run offline. Run consent checks separately at the point
+of access or disclosure.</p>
+</main></body></html>
